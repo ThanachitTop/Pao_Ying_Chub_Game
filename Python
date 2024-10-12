@@ -1,0 +1,69 @@
+from random import choice
+count = 0
+hands = ["hammer", "scissor", "paper"]
+user_score = 0
+bot_score = 0
+
+def pao_ying_chub():
+    global count
+    global user_score
+    global bot_score
+    print("Welcome to the game bro!")
+    user_name = input("What's your name: ")
+    print(f"Are you ready!! MR/MRS: {user_name}")
+
+    try:
+        ready = int(input("[1=Yes / 0=No]: "))
+    except ValueError:
+        print("Invalid input. Please enter 1 or 0.")
+        return
+
+    if ready == 1:
+        while count < 20:
+            print("let go")
+            print("Please choose your hand: [hammer, scissor, paper]")
+            user_hand = input("your hand: ")
+            computer_hand = choice(hands)
+            print(f"bot hand: {computer_hand}")
+            if user_hand == computer_hand:
+                print("It's a tie!!")
+            elif (user_hand == "hammer" and computer_hand == "scissor") or \
+                 (user_hand == "scissor" and computer_hand == "paper") or \
+                 (user_hand == "paper" and computer_hand == "hammer"):
+                 print("You win!")
+                 user_score += 1
+            else:
+                print("You lose!")
+                bot_score +=1
+
+            count +=1
+            print(user_score)
+            print(bot_score)
+
+            total_user_score = user_score
+            total_bot_score = bot_score
+
+            try:
+                con_game = input("Are you continue [1=Yes / 0=No] :")
+                if con_game not in ["1", "0"]:
+                    raise ValueError
+            except ValueError:
+                print("Invalid input. Please enter 1 or 0.")
+                continue
+
+            if con_game == "0":
+                break
+        if count >= 5:
+            print("You are real fighter")
+        else:
+            print("your score: ",total_user_score)
+            print("bot score: ",total_bot_score)
+        if count == 20:
+            print("Game over! Your final score is:", user_score)
+        else:
+            print(f"Game over bro, see you again Fighter {user_name}")
+
+    else:
+        print("Game over even you not play")
+
+pao_ying_chub()
